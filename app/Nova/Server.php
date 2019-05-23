@@ -26,8 +26,13 @@ class Server extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
+//    public static $title = 'name';
     public static $group = 'Server Helper';
+
+    public function title()
+    {
+        return $this->server_group->name . ' - ' . $this->name;
+    }
 
     /**
      * The columns that should be searched.
