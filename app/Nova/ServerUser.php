@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
@@ -33,6 +34,11 @@ class ServerUser extends Resource
     public static $search = [
         'id', 'username'
     ];
+
+    public static function label()
+    {
+        return Str::plural(ucwords(Str::snake(class_basename(get_called_class()), ' ')));
+    }
 
     /**
      * Get the fields displayed by the resource.
