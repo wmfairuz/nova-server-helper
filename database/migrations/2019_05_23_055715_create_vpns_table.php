@@ -15,6 +15,10 @@ class CreateVpnsTable extends Migration
     {
         Schema::create('vpns', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name', 100);
+            $table->string('host', 100);
+            $table->string('username', 100);
+            $table->string('password', 100);
             $table->timestamps();
         });
     }

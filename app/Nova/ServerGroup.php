@@ -2,8 +2,12 @@
 
 namespace App\Nova;
 
+use Illuminate\Support\Str;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\MorphMany;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class ServerGroup extends Resource
@@ -20,7 +24,8 @@ class ServerGroup extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
+    public static $group = 'Server Helper';
 
     /**
      * The columns that should be searched.
@@ -28,8 +33,13 @@ class ServerGroup extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name'
     ];
+
+    public static function label()
+    {
+        return Str::plural(ucwords(Str::snake(class_basename(get_called_class()), ' ')));
+    }
 
     /**
      * Get the fields displayed by the resource.
@@ -41,6 +51,9 @@ class ServerGroup extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name')->sortable(),
+            HasMany::make('Servers'),
+            MorphMany::make('Notes'),
         ];
     }
 

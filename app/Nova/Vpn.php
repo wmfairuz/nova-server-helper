@@ -2,8 +2,11 @@
 
 namespace App\Nova;
 
+use Illuminate\Support\Str;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Vpn extends Resource
@@ -20,7 +23,13 @@ class Vpn extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
+    public static $group = 'Server Helper';
+
+    public static function label()
+    {
+        return 'VPNs';
+    }
 
     /**
      * The columns that should be searched.
@@ -28,7 +37,7 @@ class Vpn extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name', 'host', 'username'
     ];
 
     /**
@@ -41,6 +50,12 @@ class Vpn extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name')->sortable(),
+            Text::make('Host')->sortable(),
+            Text::make('Username')->sortable(),
+            Text::make('Password')->hideFromIndex(),
+
+            BelongsToMany::make('Servers'),
         ];
     }
 

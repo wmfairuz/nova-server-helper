@@ -2,8 +2,12 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\MorphTo;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Note extends Resource
@@ -20,7 +24,8 @@ class Note extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'title';
+    public static $group = 'Server Helper';
 
     /**
      * The columns that should be searched.
@@ -28,7 +33,7 @@ class Note extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'title', 'body'
     ];
 
     /**
@@ -41,6 +46,13 @@ class Note extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Title')->sortable(),
+            Trix::make('Content', 'body'),
+
+            MorphTo::make('Notable')->types([
+                Server::class,
+                ServerGroup::class,
+            ])
         ];
     }
 

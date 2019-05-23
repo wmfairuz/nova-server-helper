@@ -2,8 +2,14 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\MorphMany;
+use Laravel\Nova\Fields\MorphToMany;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Server extends Resource
@@ -20,7 +26,8 @@ class Server extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
+    public static $group = 'Server Helper';
 
     /**
      * The columns that should be searched.
@@ -28,7 +35,7 @@ class Server extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name',
     ];
 
     /**
@@ -41,6 +48,13 @@ class Server extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name')->sortable(),
+            Text::make('IP Address', 'ip_address')->sortable(),
+            BelongsTo::make('Server Group'),
+            HasMany::make('Server Users'),
+            BelongsToMany::make('Vpns'),
+            MorphToMany::make('Tags'),
+            MorphMany::make('Notes'),
         ];
     }
 

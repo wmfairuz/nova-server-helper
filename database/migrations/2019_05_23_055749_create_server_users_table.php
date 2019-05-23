@@ -15,6 +15,9 @@ class CreateServerUsersTable extends Migration
     {
         Schema::create('server_users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('username', 100);
+            $table->string('password', 100);
+            $table->unsignedInteger('server_id');
             $table->timestamps();
         });
     }

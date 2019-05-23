@@ -2,8 +2,12 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\MorphedByMany;
+use Laravel\Nova\Fields\MorphMany;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Tag extends Resource
@@ -20,7 +24,8 @@ class Tag extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
+    public static $group = 'Server Helper';
 
     /**
      * The columns that should be searched.
@@ -28,7 +33,7 @@ class Tag extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name'
     ];
 
     /**
@@ -41,6 +46,9 @@ class Tag extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name')->sortable(),
+            MorphedByMany::make('Servers'),
+            MorphMany::make('Notes'),
         ];
     }
 

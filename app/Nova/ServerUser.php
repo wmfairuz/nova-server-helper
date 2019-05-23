@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class ServerUser extends Resource
@@ -20,7 +22,8 @@ class ServerUser extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'username';
+    public static $group = 'Server Helper';
 
     /**
      * The columns that should be searched.
@@ -28,7 +31,7 @@ class ServerUser extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'username'
     ];
 
     /**
@@ -41,6 +44,10 @@ class ServerUser extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Username')->sortable(),
+            Text::make('Password')->hideFromIndex(),
+
+            BelongsTo::make('Server')
         ];
     }
 
