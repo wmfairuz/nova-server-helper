@@ -11,3 +11,13 @@ Setup your Laravel as per usual.
 
 Use `fairuz.ismail@nazrol.tech / admin123` to login.
 
+## Screenshots
+
+![Server Detail](screenshots/sc3.png)
+
+![Tags](screenshots/sc4.png)
+
+![New Note](screenshots/sc2.png)
+
+![Notes](screenshots/sc1.png)
+
