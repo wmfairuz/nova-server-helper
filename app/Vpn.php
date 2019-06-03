@@ -10,4 +10,9 @@ class Vpn extends Model
     {
         return $this->belongsToMany(Server::class);
     }
+
+    public function notes()
+    {
+        return $this->morphMany(Note::class, 'notable');
+    }
 }

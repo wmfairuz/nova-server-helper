@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -56,6 +57,7 @@ class Vpn extends Resource
             Text::make('Password')->hideFromIndex(),
 
             BelongsToMany::make('Servers'),
+            MorphMany::make('Notes'),
         ];
     }
 

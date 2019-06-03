@@ -52,7 +52,8 @@ class Note extends Resource
             MorphTo::make('Notable')->types([
                 Server::class,
                 ServerGroup::class,
-                Tag::class
+                Tag::class,
+                Vpn::class,
             ])
         ];
     }
