@@ -27,6 +27,11 @@ class Note extends Resource
     public static $title = 'title';
     public static $group = 'Server Helper';
 
+    public function subtitle()
+    {
+        return $this->notable->server_group->name . ' - ' . $this->notable->name;
+    }
+
     /**
      * The columns that should be searched.
      *

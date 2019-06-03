@@ -104,6 +104,6 @@ class Server extends Resource
      */
     public function actions(Request $request)
     {
-        return [new Actions\TestAction];
+        return [];
     }
 }
