@@ -52,6 +52,10 @@ class ServerGroup extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Name')->sortable(),
+            Text::make('# Servers', function () {
+                return $this->servers->count();
+            }),
+
             HasMany::make('Servers'),
             MorphMany::make('Notes'),
         ];
