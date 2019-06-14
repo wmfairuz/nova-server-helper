@@ -57,14 +57,14 @@ class Note extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Title')->sortable(),
-            Trix::make('Content', 'body'),
-
             MorphTo::make('Notable')->types([
                 Server::class,
                 ServerGroup::class,
                 Tag::class,
                 Vpn::class,
-            ])
+            ]),
+
+            Trix::make('Content', 'body')->alwaysShow(),
         ];
     }
 
