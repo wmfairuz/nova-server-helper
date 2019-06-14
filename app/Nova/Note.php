@@ -29,7 +29,12 @@ class Note extends Resource
 
     public function subtitle()
     {
-        return $this->notable->server_group->name . ' - ' . $this->notable->name;
+        $notable = $this->notable;
+        if  (class_basename($notable) == 'Server') {
+            return $this->notable->server_group->name . ' - ' . $this->notable->name;
+        }
+
+        return $this->notable->name;
     }
 
     /**
