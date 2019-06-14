@@ -30,4 +30,9 @@ class Server extends Model
     {
         return $this->hasMany(ServerUser::class);
     }
+
+    public function snippets()
+    {
+        return $this->hasMany(Snippet::class);
+    }
 }
