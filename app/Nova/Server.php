@@ -83,7 +83,9 @@ class Server extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new \App\Nova\Filters\ServerGroup,
+        ];
     }
 
     /**
