@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\ID;
@@ -25,6 +26,12 @@ class Snippet extends Resource
      * @var string
      */
     public static $title = 'title';
+
+    public function subtitle()
+    {
+        return  $this->server->server_group->name . ' - ' . $this->server->name;
+    }
+
     public static $group = 'Server Helper';
 
     /**
@@ -33,7 +40,7 @@ class Snippet extends Resource
      * @var array
      */
     public static $search = [
-        'title',
+        'title', 'body'
     ];
 
     /**
